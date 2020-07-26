@@ -1,0 +1,6 @@
+logging:
+  level:
+    root: WARN
+    org.springframework: INFO
+  pattern:
+    console: '%clr(%d{HH:mm:ss}){green} %highlight([%-5level]) %clr(%-20.40logger{0}){faint} %clr(:){red} %clr(%m){cyan}%n'
