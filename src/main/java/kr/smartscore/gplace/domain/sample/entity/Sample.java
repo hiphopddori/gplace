@@ -29,6 +29,9 @@ public class Sample {
     @Column(nullable = false)
     private String role;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="team_Code")
+    private Team team;
 
     @Builder
     public Sample(String name, String email, String picture, String role) {
