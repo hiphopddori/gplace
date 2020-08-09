@@ -42,6 +42,23 @@ public class SampleApiControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id").value(1));
     }
+    @Test
+    public void sample_mappedBy_test() throws Exception {
+        String url = "http://localhost:" + port + "/api/sample/save";
+        //when
+        mvc.perform(get(url))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.id").value(1));
+    }
+    @Test
+    public void sample_One2One_test() throws Exception {
+        String url = "http://localhost:" + port + "/api/sample/save";
+        //when
+        mvc.perform(get(url))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.id").value(1));
+    }
+
     /*
     @Test
     public void sample_JPA_등록() throws Exception {
