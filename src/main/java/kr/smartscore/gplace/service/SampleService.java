@@ -28,22 +28,42 @@ public class SampleService {
         return sampleVo;
     }
     @Transactional
-    public void saveImage() {
-        Sample sample = sampleRepository.findByName("SYKKIM").get(0);
+    public void regImage(Long userIdx ) {
+        Sample sample = sampleRepository.findById(userIdx)
+                .orElseThrow(() -> new IllegalArgumentException("해당 사용자가 없습니다. id=" + userIdx));
         Image image = new Image();
         image.setImageUrl("/user/save1");
-        image.setImageName("save test4");
+        image.setImageName("save test6");
         sample.addImage(image);
         sampleRepository.save(sample);
     }
     @Transactional
     public void changeImage() {
         Sample sample = sampleRepository.findByName("SYKKIM").get(0);
-        Image image = sample.getImages().get(0);
-        image.setImageUrl("/user/save1/test");
+        Image chnageImage = sample.getImages().get(0);
+        chnageImage.setImageUrl("/user/save1/test");
         sampleRepository.save(sample);
     }
 
+    @Transactional
+    public void changeImageById(Long userIdx , Long imageIdx) {
+        Sample sample = sampleRepository.findByImageById(userIdx, imageIdx);
+        Image image = sample.getImages().get(0);
+        image.setImageName("changeImage");
+        // sampleRepository.save(sample);
+    }
+
+    @Transactional
+    public void removeImageById(Long userIdx , Long imageIdx) {
+        Sample sample = sampleRepository.findByImageById(userIdx, imageIdx);
+        Image image = sample.getImages().get(0);
+        // sample.getImages().remove(0);
+        // image = null;
+        // sample.getImages().remove(0);
+        sample.removeImage(image);
+        // image.setSample(null);
+        // sampleRepository.save(sample);
+    }
 
     @Transactional
     public void regEtc(long id)  {

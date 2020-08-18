@@ -90,6 +90,12 @@ public class SampleJpaTest {
     }
 
     @Test
+    public void Sample_Image_JPQL_연관관계조인_조회 () {
+
+        Sample sample = sampleRepository.findByImageById(22L ,15L);
+    }
+
+    @Test
     public void Sampel_Image_쿼리DSL_조회 () {
         List<SampleImageDto> samples = sampleRepository.findBySampleImage("DDORI");
         assertThat(samples.size(), is(1));
@@ -120,7 +126,7 @@ public class SampleJpaTest {
         Image image = new Image();
         // image.setIdx(3L);
          image.setImageUrl("/user/save1");
-         image.setImageName("저장 테스트1");
+         image.setImageName("append");
          // image.setSample(sample);
          // imageRepository.save(image);
          sample.addImage(image);
