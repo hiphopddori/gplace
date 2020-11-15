@@ -8,6 +8,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.LazyToOne;
 import org.hibernate.annotations.LazyToOneOption;
+import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -54,10 +55,13 @@ public class Sample {
     // @LazyToOne(LazyToOneOption.NO_PROXY)
     private UserEtc userEtc;
 
+    @OneToOne(mappedBy = "sample")
+    @Where(clause = "target = 'SELF'")
+    private Phone phone;
     public boolean addImage(Image image) {
         if (isImageValidatChk(image)) {
             images.add(image);
-            image.setSample(this);
+            // image.setSample(this);
             return true;
         }
         return false;

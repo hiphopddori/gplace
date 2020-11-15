@@ -13,33 +13,33 @@ public class SampleServiceTest {
     @Autowired
     private SampleService sampleService;
 
-    @Test
+    //@Test
     public void Sample_One2One_테스트 () {
         sampleService.regEtc(21);
     }
 
-    @Test
+    //@Test
     public void Sample_One2Many_Many_수정_테스트 () {
         sampleService.changeImage();
     }
-    @Test
+    //@Test
     public void Sample_ImageById_JPQL_수정_테스트 () {
         sampleService.changeImageById(22L,15L);
     }
 
-    @Test
+    //@Test
     public void Sample_ImageById_JPQL_삭제_테스트 () {
         sampleService.removeImageById(22L,14L);
     }
 
-    @Test
+    //@Test
     public void Sample_Image_추가_테스트 () {
         sampleService.regImage(22L);
     }
 
 
 
-    @Test
+    //@Test
     public void Sample_One2One_delete_테스트 (){
         sampleService.deleteEtc(21);
     }

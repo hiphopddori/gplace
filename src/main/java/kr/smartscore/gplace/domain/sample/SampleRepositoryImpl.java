@@ -2,15 +2,19 @@ package kr.smartscore.gplace.domain.sample;
 
 import com.querydsl.core.types.Projections;
 import com.querydsl.core.types.dsl.BooleanExpression;
+
+import com.querydsl.jpa.impl.JPAQueryFactory;
+
 import kr.smartscore.gplace.domain.sample.entity.QImage;
 import kr.smartscore.gplace.domain.sample.entity.QSample;
-import com.querydsl.jpa.impl.JPAQueryFactory;
 import kr.smartscore.gplace.domain.sample.entity.QTeam2;
 import kr.smartscore.gplace.domain.sample.entity.Sample;
 import kr.smartscore.gplace.web.dto.sample.SampleImageDto;
 import kr.smartscore.gplace.web.dto.sample.SampleTeamDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.util.StringUtils;
+
+
 
 import java.util.List;
 
@@ -52,11 +56,14 @@ public class SampleRepositoryImpl implements SampleRepositoryCustom {
     }
 
     public List<SampleImageDto> findBySampleImageUserIdx() {
+        /*
         return queryFactory.select((Projections.fields(SampleImageDto.class,
                 QImage.image.sample.id,
                 QImage.image.imageName)))
                 .from(QImage.image)
                 .fetch();
+         */
+        return null;
     }
 
 

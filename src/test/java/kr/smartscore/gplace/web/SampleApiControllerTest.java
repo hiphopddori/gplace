@@ -6,11 +6,13 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.web.server.LocalServerPort;
+import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -34,7 +36,7 @@ public class SampleApiControllerTest {
                 .build();
     }
 
-    @Test
+    //@Test
     public void sample_마이바티스_조회() throws Exception {
         String url = "http://localhost:" + port + "/api/sample/1";
         //when
@@ -43,7 +45,7 @@ public class SampleApiControllerTest {
                 .andExpect(jsonPath("$.id").value(1));
     }
 
-    @Test
+    //@Test
     public void sample_공통_예외처리_테스트() throws Exception {
         String url = "http://localhost:" + port + "/api/sample/exception/1";
         //when
@@ -51,9 +53,24 @@ public class SampleApiControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id").value(1));
     }
-
+    //@Test
+    public void sample_One2One_조_테스트() throws Exception {
+        String url = "http://localhost:" + port + "/api/sample/one2one/1";
+        //when
+        mvc.perform(get(url))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.id").value(1));
+    }
 
     @Test
+    public void user_image_reg_findBy없이_fk설정() throws Exception {
+        String url = "http://localhost:" + port + "/api/user/21/image";
+        //when
+        mvc.perform(post(url))
+                .andExpect(status().isOk());
+    }
+
+    //@Test
     public void sample_mappedBy_test() throws Exception {
         String url = "http://localhost:" + port + "/api/sample/save";
         //when
@@ -61,7 +78,7 @@ public class SampleApiControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id").value(1));
     }
-    @Test
+    //@Test
     public void sample_One2One_test() throws Exception {
         String url = "http://localhost:" + port + "/api/sample/save";
         //when

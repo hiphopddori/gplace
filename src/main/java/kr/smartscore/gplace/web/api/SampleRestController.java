@@ -22,6 +22,16 @@ public class SampleRestController {
         test.setData("test");
         return test;
     }
+    @GetMapping("api/sample/one2one/{id}")
+    public Long One2OneTest(@PathVariable Long id) {
+        sampleService.One2OneTest(id);
+        return 1L;
+    }
+    @PostMapping("api/user/{id}/image")
+    public void reg(@PathVariable Long id) {
+        sampleService.regImage(id);
+    }
+
     /*
     @PostMapping("api/sample")
     public Long reg(@RequestBody SampleSaveRequestDto requestDto) {

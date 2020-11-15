@@ -38,7 +38,7 @@ public class SampleJpaTest {
     @Autowired
     private ImageRepository imageRepository;
 
-    @Test
+    //@Test
     public void Sample_QueryDsl_Test () {
         // given
         String findEmail = "developerkorea@gmail.com";
@@ -51,7 +51,7 @@ public class SampleJpaTest {
         Boolean isData = samples.size() > 0;
         assertThat(isData, is(true));
     }
-    @Test
+    //@Test
     public void Sample_레파지토리_팩토리_Test () {
         // given
         String findName = "grukim";
@@ -61,7 +61,7 @@ public class SampleJpaTest {
         Boolean isData = samples.size() == 3;
         assertThat(isData, is(true));
     }
-    @Test
+    //@Test
     @Transactional
     public void Sample_Lazy_Test () {
         List<Sample> samples = sampleRepository.findByName("DDORI");
@@ -73,7 +73,7 @@ public class SampleJpaTest {
         assertThat(teamName2, is("개발4팀_1"));
     }
 
-    @Test
+    //@Test
     @Transactional
     public void Sample_fetch_Test () {
         /*
@@ -83,31 +83,31 @@ public class SampleJpaTest {
         assertThat(teamName, is("개발4팀"));
          */
     }
-    @Test
+    //@Test
     public void Sampel_Team_쿼리DSL_조회 () {
         List<SampleTeamDto> samples = sampleRepository.findBySampleTeam("DDORI");
         assertThat(samples.size(), is(1));
     }
 
-    @Test
+    //@Test
     public void Sample_Image_JPQL_연관관계조인_조회 () {
 
         Sample sample = sampleRepository.findByImageById(22L ,15L);
     }
 
-    @Test
+    //@Test
     public void Sampel_Image_쿼리DSL_조회 () {
         List<SampleImageDto> samples = sampleRepository.findBySampleImage("DDORI");
         assertThat(samples.size(), is(1));
     }
 
-    @Test
+    //@Test
     public void Sampel_ImageEntity통한_Sample_접근_쿼리DSL_조회 () {
         List<SampleImageDto> samples = sampleRepository.findBySampleImageUserIdx();
         assertThat(samples.size(), is(1));
     }
 
-    @Test
+    //@Test
     @Transactional
     public void MappedByTest () {
         Image image = imageRepository.findByIdx((long) 2);
@@ -116,7 +116,7 @@ public class SampleJpaTest {
         // imageRepository.flush();
     }
 
-    @Test
+    //@Test
     @Transactional
     public void MappedByInsertTest () {
 
@@ -134,7 +134,7 @@ public class SampleJpaTest {
     }
 
 
-    @Test
+    //@Test
     @Transactional
     public void Sample_팀_팀레파지토리_저장_Test () {
        Team team = Team.builder()
