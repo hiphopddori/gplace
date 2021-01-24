@@ -55,6 +55,14 @@ public class SampleRepositoryImpl implements SampleRepositoryCustom {
                 .fetch();
     }
 
+    public List<SampleImageDto> findByImageJsonColumn() {
+        return queryFactory.select((Projections.fields(SampleImageDto.class,
+                QImage.image.metaInfo.as("metaInfo"),
+                QImage.image.imageName)))
+                .from(QImage.image)
+                .fetch();
+    }
+
     public List<SampleImageDto> findBySampleImageUserIdx() {
         /*
         return queryFactory.select((Projections.fields(SampleImageDto.class,
@@ -65,7 +73,6 @@ public class SampleRepositoryImpl implements SampleRepositoryCustom {
          */
         return null;
     }
-
 
     private BooleanExpression eqEmail(String email) {
         if (StringUtils.isEmpty(email)) {

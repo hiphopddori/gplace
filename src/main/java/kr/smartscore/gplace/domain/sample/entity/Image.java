@@ -50,6 +50,11 @@ public class Image {
         this.sample = sample;
     }
 
+    public Image addMetaInfo(String key, Object value){
+        this.metaInfo.put(key, value);
+        return this;
+    }
+
     public void serializeMetaInfo() throws JsonProcessingException {
         ObjectMapper objectMapper = new ObjectMapper();
         this.metaInfoStr = objectMapper.writeValueAsString(metaInfo);

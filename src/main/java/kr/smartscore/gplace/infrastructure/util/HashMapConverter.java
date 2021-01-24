@@ -35,7 +35,7 @@ public class HashMapConverter implements AttributeConverter<Map<String, Object>,
         // ObjectMapper objectMapper = new ObjectMapper();
         Map<String, Object> customerInfo = null;
         try {
-            customerInfo = objectMapper.readValue(customerInfoJSON, Map.class);
+            if (customerInfoJSON !=null) customerInfo = objectMapper.readValue(customerInfoJSON, Map.class);
         } catch (final IOException e) {
             // logger.error("JSON reading error", e);
         }

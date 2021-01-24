@@ -1,8 +1,10 @@
 package kr.smartscore.gplace.web.api;
 
+import kr.smartscore.gplace.domain.sample.SampleRepository;
 import kr.smartscore.gplace.domain.sample.entity.Image;
 import kr.smartscore.gplace.domain.sample.entity.Sample;
 import kr.smartscore.gplace.service.SampleService;
+import kr.smartscore.gplace.web.dto.sample.SampleImageDto;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -17,6 +19,8 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
+import java.util.List;
+
 import static org.hamcrest.Matchers.is;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -30,6 +34,9 @@ public class SampleRestControllerTest {
 
     @Autowired
     private SampleService sampleService;
+
+    @Autowired
+    private SampleRepository sampleRepository;
 
     @Test
     public void sample_저장후_자동증가_idx_가져오는지_TEST() throws Exception {
@@ -52,5 +59,10 @@ public class SampleRestControllerTest {
     public void sample_이미지_메타정보_JSON_추가_Test() throws  Exception {
         Image image = sampleService.addImageAndMetaData();
         Assert.assertThat(image.getMetaInfo().get("area"), is("gurodigital"));
+    }
+    @Test
+    public void sample_이미지_메타정보_JSON_조회_Test() throws  Exception {
+        List<SampleImageDto> images = sampleRepository.findByImageJsonColumn();
+        Assert.assertTrue(images.size() > 0);
     }
 }

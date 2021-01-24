@@ -88,10 +88,8 @@ public class SampleService {
         image.setImageName("대표이미지");
         image.setImageUrl("/image/base.jpg");
 
-        Map metaInfo = new HashMap();
-        metaInfo.put("area", "gurodigital");
-        metaInfo.put("phone", "01063604603");
-        image.setMetaInfo(metaInfo);
+        image.addMetaInfo("area","chungchundong")
+                .addMetaInfo("phone", "01063604604");
 
         mayBeSample.ifPresent(sample -> {
             sample.addImage(image);

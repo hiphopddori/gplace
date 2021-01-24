@@ -13,4 +13,6 @@ public interface SampleRepositoryCustom {
     List<SampleTeamDto> findBySampleTeam(String name);
     List<SampleImageDto> findBySampleImage(String name);
     List<SampleImageDto> findBySampleImageUserIdx();
+    List<SampleImageDto> findByImageJsonColumn();
+
 }
