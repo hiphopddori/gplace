@@ -4,6 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.http.MediaType;
@@ -18,7 +19,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringRunner.class)
-//@WebMvcTest
+@WebMvcTest
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class SampleApiControllerTest {
 
@@ -34,6 +35,14 @@ public class SampleApiControllerTest {
                 .webAppContextSetup(context)
                 // .apply(springSecurity())
                 .build();
+    }
+
+    @Test
+    public void sample_저장후_자동증가_idx_가져오는지_TEST() throws Exception {
+        String url = "http://localhost:" + port + "/api/sample";
+        //when
+        mvc.perform(post(url))
+                .andExpect(status().isOk());
     }
 
     //@Test

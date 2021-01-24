@@ -11,14 +11,16 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
 public class SampleService {
 
-    private final ImageRepository imageRepository;
+    // private final ImageRepository imageRepository;
     private final Image2Repository image2Repository;
     private final SampleMapper sampleMapper;
     private final SampleRepository sampleRepository;
@@ -52,6 +54,54 @@ public class SampleService {
         image2Repository.save(image);
 
     }
+    @Transactional
+    public Sample addSample() {
+        Sample sample = Sample.builder()
+                .email("sunsee78@gmail.com")
+                .picture("/image/test.jps")
+                .name("김인철")
+                .role("ADMIN")
+                .build();
+
+        sampleRepository.save(sample);
+        return sample;
+    }
+    @Transactional
+    public Image addImage() {
+        Optional<Sample> mayBeSample = sampleRepository.findById(1L);
+        Image image = new Image();
+        image.setImageName("대표이미지");
+        image.setImageUrl("/image/base.jpg");
+        mayBeSample.ifPresent(sample -> {
+            sample.addImage(image);
+        });
+        sampleRepository.flush();
+
+        // sampleRepository.save(mayBeSample.get());
+        return image;
+    }
+
+    @Transactional
+    public Image addImageAndMetaData() {
+        Optional<Sample> mayBeSample = sampleRepository.findById(1L);
+        Image image = new Image();
+        image.setImageName("대표이미지");
+        image.setImageUrl("/image/base.jpg");
+
+        Map metaInfo = new HashMap();
+        metaInfo.put("area", "gurodigital");
+        metaInfo.put("phone", "01063604603");
+        image.setMetaInfo(metaInfo);
+
+        mayBeSample.ifPresent(sample -> {
+            sample.addImage(image);
+        });
+        // sampleRepository.flush();
+
+        // sampleRepository.save(mayBeSample.get());
+        return image;
+    }
+
     @Transactional
     public void changeImage() {
         Sample sample = sampleRepository.findByName("SYKKIM").get(0);

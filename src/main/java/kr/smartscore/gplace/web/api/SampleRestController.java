@@ -1,5 +1,6 @@
 package kr.smartscore.gplace.web.api;
 
+import kr.smartscore.gplace.domain.sample.entity.Sample;
 import kr.smartscore.gplace.infrastructure.dao.sample.vo.SampleVo;
 import kr.smartscore.gplace.service.SampleService;
 import kr.smartscore.gplace.web.ResultInfo;
@@ -14,6 +15,11 @@ public class SampleRestController {
     @GetMapping("api/sample/{id}")
     public SampleVo findById(@PathVariable Long id) {
         return sampleService.findeById(id);
+    }
+
+    @PostMapping("api/sample")
+    public Sample addSample() {
+        return this.sampleService.addSample();
     }
 
     @GetMapping("api/sample/exception/{id}")

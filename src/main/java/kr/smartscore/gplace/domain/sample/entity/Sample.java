@@ -3,6 +3,7 @@ package kr.smartscore.gplace.domain.sample.entity;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,7 +16,9 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+@Builder
 @Getter
+@AllArgsConstructor
 @NoArgsConstructor
 @Entity
 @Table(name = "user")
@@ -47,6 +50,8 @@ public class Sample {
     private Team2 team2;
 
     //orphanRemoval = true , cascade = CascadeType.ALL 두개다 줘야 실제 삭제가 됨
+
+    @Builder.Default
     @OneToMany(mappedBy = "sample", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true  )
     @JsonIgnore
     private List<Image> images = new ArrayList<Image>();
@@ -60,6 +65,7 @@ public class Sample {
     private Phone phone;
     public boolean addImage(Image image) {
         if (isImageValidatChk(image)) {
+            image.setSample(this);
             images.add(image);
             // image.setSample(this);
             return true;
