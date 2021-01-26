@@ -14,7 +14,9 @@ import org.hibernate.annotations.TypeDef;
 
 import javax.persistence.*;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Getter
@@ -48,6 +50,21 @@ public class Image {
 
     public void setSample(Sample sample) {
         this.sample = sample;
+    }
+
+    public Image addMetaList(String area, String phone) {
+        Map<String, Object> obj = new HashMap<>();
+        obj.put("area",area);
+        obj.put("phone",phone);
+        List datas = null;
+        if (this.metaInfo.containsKey("items")) {
+            datas = (List)metaInfo.get("items");
+        } else{
+            datas =  new ArrayList<Map<String, Object>>();
+        }
+        datas.add(obj);
+        this.metaInfo.put("items", datas);
+        return this;
     }
 
     public Image addMetaInfo(String key, Object value){

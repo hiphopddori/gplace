@@ -65,4 +65,10 @@ public class SampleRestControllerTest {
         List<SampleImageDto> images = sampleRepository.findByImageJsonColumn();
         Assert.assertTrue(images.size() > 0);
     }
+    @Test
+    public void sample_이미지_메타정보_JSON_ARRAY_추가() throws  Exception{
+        Image image = sampleService.addImageAndMetaDataList();
+        Assert.assertThat(((List)image.getMetaInfo().get("datas")).size(), is(2));
+    }
+
 }

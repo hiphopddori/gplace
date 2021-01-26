@@ -101,6 +101,23 @@ public class SampleService {
     }
 
     @Transactional
+    public Image addImageAndMetaDataList() {
+        Optional<Sample> mayBeSample = sampleRepository.findById(1L);
+        Image image = new Image();
+        image.setImageName("대표이미지");
+        image.setImageUrl("/image/base.jpg");
+
+        image.addMetaList("chungchundong", "01063604604")
+                .addMetaList("gurodigital", "01022223333");
+
+
+        mayBeSample.ifPresent(sample -> {
+            sample.addImage(image);
+        });
+        return image;
+    }
+
+    @Transactional
     public void changeImage() {
         Sample sample = sampleRepository.findByName("SYKKIM").get(0);
         Image chnageImage = sample.getImages().get(0);
