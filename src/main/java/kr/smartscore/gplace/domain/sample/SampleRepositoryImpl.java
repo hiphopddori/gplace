@@ -58,8 +58,10 @@ public class SampleRepositoryImpl implements SampleRepositoryCustom {
     public List<SampleImageDto> findByImageJsonColumn() {
         return queryFactory.select((Projections.fields(SampleImageDto.class,
                 QImage.image.metaInfo.as("metaInfo"),
+                QImage.image.metaInfos.as("metaInfos"),
                 QImage.image.imageName)))
                 .from(QImage.image)
+                .where(QImage.image.idx.eq(24L))
                 .fetch();
     }
 

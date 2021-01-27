@@ -7,6 +7,7 @@ import com.vladmihalcea.hibernate.type.json.JsonBinaryType;
 import com.vladmihalcea.hibernate.type.json.JsonStringType;
 import kr.smartscore.gplace.infrastructure.util.HashMapConverter;
 import kr.smartscore.gplace.infrastructure.util.ListConverter;
+import kr.smartscore.gplace.infrastructure.util.ObjectConverter;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -42,7 +43,7 @@ public class Image {
     @Column(name = "meta_info", columnDefinition = "json")
     private Map<String, Object> metaInfo = new HashMap<>();
 
-    @Convert(converter = ListConverter.class)
+    @Convert(converter = ObjectConverter.class)
     @Column(name = "meta_infos", columnDefinition = "json")
     private List<Map<String, Object>> metaInfos = new ArrayList<>();
 

@@ -20,6 +20,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
 import java.util.List;
+import java.util.Map;
 
 import static org.hamcrest.Matchers.is;
 import static org.junit.jupiter.api.Assertions.*;
@@ -63,7 +64,9 @@ public class SampleRestControllerTest {
     @Test
     public void sample_이미지_메타정보_JSON_조회_Test() throws  Exception {
         List<SampleImageDto> images = sampleRepository.findByImageJsonColumn();
-        Assert.assertTrue(images.size() > 0);
+        Map metaInfo = images.get(0).getMetaInfos().get(0);
+        // Assert.assertTrue(images.size() > 0);
+        Assert.assertThat(metaInfo.get("area"), is("chungchundong"));
     }
     @Test
     public void sample_이미지_메타정보_JSON_ARRAY_추가() throws  Exception{

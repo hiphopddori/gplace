@@ -4,6 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 @Getter
@@ -14,4 +16,5 @@ public class SampleImageDto {
     private long id;
     private String imageName;
     private Map metaInfo;
+    private List<Map<String, Object>> metaInfos;
 }

@@ -113,8 +113,8 @@ public class SampleService {
         */
 
 
-        image.addMetaInfos("area","chungchundong")
-                .addMetaInfos("phone", "01063604604");
+        image.addMetaInfos("chungchundong","01063604603")
+                .addMetaInfos("gudi", "01022223333");
 
         mayBeSample.ifPresent(sample -> {
             sample.addImage(image);
