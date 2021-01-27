@@ -91,6 +91,7 @@ public class SampleService {
         image.addMetaInfo("area","chungchundong")
                 .addMetaInfo("phone", "01063604604");
 
+
         mayBeSample.ifPresent(sample -> {
             sample.addImage(image);
         });
@@ -106,10 +107,14 @@ public class SampleService {
         Image image = new Image();
         image.setImageName("대표이미지");
         image.setImageUrl("/image/base.jpg");
-
+        /*
         image.addMetaList("chungchundong", "01063604604")
                 .addMetaList("gurodigital", "01022223333");
+        */
 
+
+        image.addMetaInfos("area","chungchundong")
+                .addMetaInfos("phone", "01063604604");
 
         mayBeSample.ifPresent(sample -> {
             sample.addImage(image);

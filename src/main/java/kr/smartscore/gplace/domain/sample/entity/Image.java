@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.vladmihalcea.hibernate.type.json.JsonBinaryType;
 import com.vladmihalcea.hibernate.type.json.JsonStringType;
 import kr.smartscore.gplace.infrastructure.util.HashMapConverter;
+import kr.smartscore.gplace.infrastructure.util.ListConverter;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -40,6 +41,11 @@ public class Image {
     @Convert(converter = HashMapConverter.class)
     @Column(name = "meta_info", columnDefinition = "json")
     private Map<String, Object> metaInfo = new HashMap<>();
+
+    @Convert(converter = ListConverter.class)
+    @Column(name = "meta_infos", columnDefinition = "json")
+    private List<Map<String, Object>> metaInfos = new ArrayList<>();
+
     @Transient
     private String metaInfoStr;
 
@@ -50,6 +56,25 @@ public class Image {
 
     public void setSample(Sample sample) {
         this.sample = sample;
+    }
+
+    public Image addMetaInfos(String area, String phone) {
+        Map<String, Object> obj = new HashMap<>();
+        obj.put("area",area);
+        obj.put("phone",phone);
+
+        this.metaInfos.add(obj);
+        /*
+        List datas = null;
+        if (this.metaInfo.containsKey("items")) {
+            datas = (List)metaInfo.get("items");
+        } else{
+            datas =  new ArrayList<Map<String, Object>>();
+        }
+        datas.add(obj);
+        this.metaInfo.put("items", datas);
+        */
+        return this;
     }
 
     public Image addMetaList(String area, String phone) {
